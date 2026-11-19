@@ -404,10 +404,14 @@
 
   <!-- Main Container -->
   <div class="relative z-20 mx-auto w-full max-w-4xl px-4 pt-4 pb-8 sm:px-6 sm:pt-7 sm:pb-10">
-    <!-- Top Sticky Glass Navigation Bar -->
+    <!-- Top Sticky Glass Navigation Bar (Stealth 5-Tap Admin Trigger on Brand Title) -->
     <header class="equinox-navbar mb-7 rounded-2xl px-4 py-3 sm:mb-10 sm:px-5 sm:py-3.5">
       <div class="flex items-center justify-between gap-3">
-        <div class="min-w-0">
+        <div
+          id="stealthAdminTrigger"
+          data-action="brand-tap"
+          class="min-w-0 cursor-default select-none"
+        >
           <span
             id="navbarBrandTitle"
             class="block truncate text-sm font-extrabold tracking-tight text-white uppercase sm:text-base"
@@ -423,40 +427,12 @@
         </div>
 
         <span
-          class="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-blue-400/35 bg-blue-500/15 px-3 py-1 text-[11px] font-semibold tracking-wide text-blue-200"
+          class="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-blue-400/35 bg-blue-500/15 px-3 py-1 font-mono text-[11px] font-semibold tracking-wide text-blue-200"
         >
           <span class="h-1.5 w-1.5 rounded-full bg-blue-400"></span>
           <span id="liveSlotStatusText">0/12 BOOKED</span>
         </span>
       </div>
-
-      <!-- Segmented Switcher -->
-      <nav
-        class="mt-3 grid grid-cols-2 gap-1.5 rounded-xl border border-blue-400/25 bg-obsidian-950/40 p-1 backdrop-blur-md"
-        role="tablist"
-        aria-label="Slot list navigation"
-      >
-        <button
-          id="tabPublicSlots"
-          type="button"
-          role="tab"
-          aria-selected="true"
-          onclick="window.openPublicView(false)"
-          class="equinox-btn-primary inline-flex cursor-pointer items-center justify-center rounded-lg px-3.5 py-2 text-xs font-semibold text-white sm:text-sm"
-        >
-          Public Slots
-        </button>
-        <button
-          id="tabAdminPanel"
-          type="button"
-          role="tab"
-          aria-selected="false"
-          onclick="window.openAdminView(false)"
-          class="inline-flex cursor-pointer items-center justify-center rounded-lg px-3.5 py-2 text-xs font-medium text-slate-300 transition hover:text-white sm:text-sm"
-        >
-          Admin Panel
-        </button>
-      </nav>
     </header>
 
     <!-- Equinox Editorial Hero Section -->
@@ -483,24 +459,15 @@
         <span class="font-semibold text-blue-300">AVAILABLE</span> until confirmed by tournament administration.
       </p>
 
-      <!-- Two Side-by-Side Hero CTA Buttons -->
-      <div class="relative z-30 mt-5 flex flex-wrap items-center justify-center gap-3">
+      <!-- Single Public Hero CTA Button -->
+      <div class="relative z-30 mt-5 flex items-center justify-center">
         <button
           id="btnHeroViewSlots"
           type="button"
-          onclick="window.openPublicView(true)"
-          class="equinox-btn-white inline-flex cursor-pointer items-center gap-2 rounded-xl px-5 py-2.5 text-xs font-semibold sm:text-sm"
+          data-action="scroll-slots"
+          class="equinox-btn-white inline-flex cursor-pointer items-center gap-2 rounded-xl px-6 py-2.5 text-xs font-semibold sm:text-sm"
         >
           <span>View 12 Slots</span>
-        </button>
-        <button
-          id="btnHeroManageAdmin"
-          type="button"
-          onclick="window.openAdminView(true)"
-          class="equinox-glass-btn inline-flex cursor-pointer items-center gap-1.5 rounded-xl px-4 py-2.5 text-xs font-medium text-slate-200 sm:text-sm"
-        >
-          <span>Manage Slots</span>
-          <span aria-hidden="true" class="text-blue-400">&rarr;</span>
         </button>
       </div>
     </section>
@@ -510,7 +477,7 @@
       <!-- Summary Metrics Header -->
       <div class="mb-5 flex flex-wrap items-center justify-between gap-3 border-b border-blue-400/20 pb-4">
         <div>
-          <span class="inline-flex items-center rounded-full border border-blue-400/30 bg-blue-500/15 px-2.5 py-0.5 text-[10px] font-semibold tracking-wider text-blue-300 uppercase">
+          <span class="inline-flex items-center rounded-full border border-blue-400/30 bg-blue-500/15 px-2.5 py-0.5 font-mono text-[10px] font-semibold tracking-wider text-blue-300 uppercase">
             LOBBY LINEUP • 01-12
           </span>
           <h2 class="mt-1 text-base font-bold tracking-tight text-white sm:text-lg">
@@ -521,11 +488,11 @@
         <div class="flex items-center gap-2.5">
           <div class="rounded-xl border border-blue-400/25 bg-obsidian-950/40 px-3.5 py-1.5 backdrop-blur-md">
             <span class="block text-[10px] font-medium tracking-wider text-slate-400 uppercase">BOOKED</span>
-            <span id="summaryBooked" class="text-sm font-bold tabular-nums text-blue-400 sm:text-base">00</span>
+            <span id="summaryBooked" class="font-mono text-sm font-bold tabular-nums text-blue-400 sm:text-base">00</span>
           </div>
           <div class="rounded-xl border border-blue-400/25 bg-obsidian-950/40 px-3.5 py-1.5 backdrop-blur-md">
             <span class="block text-[10px] font-medium tracking-wider text-slate-400 uppercase">AVAILABLE</span>
-            <span id="summaryAvailable" class="text-sm font-bold tabular-nums text-white sm:text-base">12</span>
+            <span id="summaryAvailable" class="font-mono text-sm font-bold tabular-nums text-white sm:text-base">12</span>
           </div>
         </div>
       </div>
@@ -540,7 +507,7 @@
         <span id="toastBannerMessage" class="min-w-0 truncate">Slot list updated.</span>
         <button
           type="button"
-          onclick="window.hideToast()"
+          data-action="dismiss-toast"
           aria-label="Dismiss message"
           class="ml-3 shrink-0 rounded-lg px-2 py-0.5 text-xs text-slate-400 hover:bg-white/10 hover:text-white"
         >
@@ -590,7 +557,8 @@
               <button
                 id="btnCopyRoomId"
                 type="button"
-                onclick="window.copyRoomField('id', this)"
+                data-action="copy-room"
+                data-field="id"
                 class="equinox-glass-btn inline-flex shrink-0 cursor-pointer items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-semibold text-white"
                 aria-label="Copy Room ID"
               >
@@ -618,7 +586,8 @@
               <button
                 id="btnCopyRoomPass"
                 type="button"
-                onclick="window.copyRoomField('pass', this)"
+                data-action="copy-room"
+                data-field="pass"
                 class="equinox-glass-btn inline-flex shrink-0 cursor-pointer items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-semibold text-white"
                 aria-label="Copy Room Password"
               >
@@ -641,11 +610,156 @@
           <span>STATUS</span>
         </div>
 
-        <!-- 12-Slot List Rows (01 - 12) -->
-        <div id="publicSlotsList" class="space-y-2.5"></div>
+        <!-- 12-Slot List Rows (Pre-Rendered Static Fallback + Dynamic Hydration) -->
+        <div id="slot-list-container" class="space-y-2.5">
+          <div class="equinox-slot-row flex items-center justify-between gap-3 rounded-2xl px-3 py-2.5 sm:px-4 sm:py-3">
+            <div class="flex min-w-0 flex-1 items-center gap-3.5 sm:gap-5">
+              <span class="slot-num-badge inline-flex h-9 w-10 shrink-0 items-center justify-center rounded-xl font-mono text-xs font-extrabold tracking-wider text-white sm:h-10 sm:w-11 sm:text-sm">01</span>
+              <span class="truncate text-sm font-semibold tracking-wide text-slate-400 sm:text-base">Open Slot</span>
+            </div>
+            <div class="shrink-0">
+              <span class="inline-flex items-center gap-1.5 rounded-full border border-blue-400/20 bg-obsidian-950/45 px-3 py-1 text-[10px] font-semibold tracking-wider text-slate-400 uppercase sm:text-[11px]">
+                <span class="h-1.5 w-1.5 rounded-full bg-slate-500"></span>
+                AVAILABLE
+              </span>
+            </div>
+          </div>
+          <div class="equinox-slot-row flex items-center justify-between gap-3 rounded-2xl px-3 py-2.5 sm:px-4 sm:py-3">
+            <div class="flex min-w-0 flex-1 items-center gap-3.5 sm:gap-5">
+              <span class="slot-num-badge inline-flex h-9 w-10 shrink-0 items-center justify-center rounded-xl font-mono text-xs font-extrabold tracking-wider text-white sm:h-10 sm:w-11 sm:text-sm">02</span>
+              <span class="truncate text-sm font-semibold tracking-wide text-slate-400 sm:text-base">Open Slot</span>
+            </div>
+            <div class="shrink-0">
+              <span class="inline-flex items-center gap-1.5 rounded-full border border-blue-400/20 bg-obsidian-950/45 px-3 py-1 text-[10px] font-semibold tracking-wider text-slate-400 uppercase sm:text-[11px]">
+                <span class="h-1.5 w-1.5 rounded-full bg-slate-500"></span>
+                AVAILABLE
+              </span>
+            </div>
+          </div>
+          <div class="equinox-slot-row flex items-center justify-between gap-3 rounded-2xl px-3 py-2.5 sm:px-4 sm:py-3">
+            <div class="flex min-w-0 flex-1 items-center gap-3.5 sm:gap-5">
+              <span class="slot-num-badge inline-flex h-9 w-10 shrink-0 items-center justify-center rounded-xl font-mono text-xs font-extrabold tracking-wider text-white sm:h-10 sm:w-11 sm:text-sm">03</span>
+              <span class="truncate text-sm font-semibold tracking-wide text-slate-400 sm:text-base">Open Slot</span>
+            </div>
+            <div class="shrink-0">
+              <span class="inline-flex items-center gap-1.5 rounded-full border border-blue-400/20 bg-obsidian-950/45 px-3 py-1 text-[10px] font-semibold tracking-wider text-slate-400 uppercase sm:text-[11px]">
+                <span class="h-1.5 w-1.5 rounded-full bg-slate-500"></span>
+                AVAILABLE
+              </span>
+            </div>
+          </div>
+          <div class="equinox-slot-row flex items-center justify-between gap-3 rounded-2xl px-3 py-2.5 sm:px-4 sm:py-3">
+            <div class="flex min-w-0 flex-1 items-center gap-3.5 sm:gap-5">
+              <span class="slot-num-badge inline-flex h-9 w-10 shrink-0 items-center justify-center rounded-xl font-mono text-xs font-extrabold tracking-wider text-white sm:h-10 sm:w-11 sm:text-sm">04</span>
+              <span class="truncate text-sm font-semibold tracking-wide text-slate-400 sm:text-base">Open Slot</span>
+            </div>
+            <div class="shrink-0">
+              <span class="inline-flex items-center gap-1.5 rounded-full border border-blue-400/20 bg-obsidian-950/45 px-3 py-1 text-[10px] font-semibold tracking-wider text-slate-400 uppercase sm:text-[11px]">
+                <span class="h-1.5 w-1.5 rounded-full bg-slate-500"></span>
+                AVAILABLE
+              </span>
+            </div>
+          </div>
+          <div class="equinox-slot-row flex items-center justify-between gap-3 rounded-2xl px-3 py-2.5 sm:px-4 sm:py-3">
+            <div class="flex min-w-0 flex-1 items-center gap-3.5 sm:gap-5">
+              <span class="slot-num-badge inline-flex h-9 w-10 shrink-0 items-center justify-center rounded-xl font-mono text-xs font-extrabold tracking-wider text-white sm:h-10 sm:w-11 sm:text-sm">05</span>
+              <span class="truncate text-sm font-semibold tracking-wide text-slate-400 sm:text-base">Open Slot</span>
+            </div>
+            <div class="shrink-0">
+              <span class="inline-flex items-center gap-1.5 rounded-full border border-blue-400/20 bg-obsidian-950/45 px-3 py-1 text-[10px] font-semibold tracking-wider text-slate-400 uppercase sm:text-[11px]">
+                <span class="h-1.5 w-1.5 rounded-full bg-slate-500"></span>
+                AVAILABLE
+              </span>
+            </div>
+          </div>
+          <div class="equinox-slot-row flex items-center justify-between gap-3 rounded-2xl px-3 py-2.5 sm:px-4 sm:py-3">
+            <div class="flex min-w-0 flex-1 items-center gap-3.5 sm:gap-5">
+              <span class="slot-num-badge inline-flex h-9 w-10 shrink-0 items-center justify-center rounded-xl font-mono text-xs font-extrabold tracking-wider text-white sm:h-10 sm:w-11 sm:text-sm">06</span>
+              <span class="truncate text-sm font-semibold tracking-wide text-slate-400 sm:text-base">Open Slot</span>
+            </div>
+            <div class="shrink-0">
+              <span class="inline-flex items-center gap-1.5 rounded-full border border-blue-400/20 bg-obsidian-950/45 px-3 py-1 text-[10px] font-semibold tracking-wider text-slate-400 uppercase sm:text-[11px]">
+                <span class="h-1.5 w-1.5 rounded-full bg-slate-500"></span>
+                AVAILABLE
+              </span>
+            </div>
+          </div>
+          <div class="equinox-slot-row flex items-center justify-between gap-3 rounded-2xl px-3 py-2.5 sm:px-4 sm:py-3">
+            <div class="flex min-w-0 flex-1 items-center gap-3.5 sm:gap-5">
+              <span class="slot-num-badge inline-flex h-9 w-10 shrink-0 items-center justify-center rounded-xl font-mono text-xs font-extrabold tracking-wider text-white sm:h-10 sm:w-11 sm:text-sm">07</span>
+              <span class="truncate text-sm font-semibold tracking-wide text-slate-400 sm:text-base">Open Slot</span>
+            </div>
+            <div class="shrink-0">
+              <span class="inline-flex items-center gap-1.5 rounded-full border border-blue-400/20 bg-obsidian-950/45 px-3 py-1 text-[10px] font-semibold tracking-wider text-slate-400 uppercase sm:text-[11px]">
+                <span class="h-1.5 w-1.5 rounded-full bg-slate-500"></span>
+                AVAILABLE
+              </span>
+            </div>
+          </div>
+          <div class="equinox-slot-row flex items-center justify-between gap-3 rounded-2xl px-3 py-2.5 sm:px-4 sm:py-3">
+            <div class="flex min-w-0 flex-1 items-center gap-3.5 sm:gap-5">
+              <span class="slot-num-badge inline-flex h-9 w-10 shrink-0 items-center justify-center rounded-xl font-mono text-xs font-extrabold tracking-wider text-white sm:h-10 sm:w-11 sm:text-sm">08</span>
+              <span class="truncate text-sm font-semibold tracking-wide text-slate-400 sm:text-base">Open Slot</span>
+            </div>
+            <div class="shrink-0">
+              <span class="inline-flex items-center gap-1.5 rounded-full border border-blue-400/20 bg-obsidian-950/45 px-3 py-1 text-[10px] font-semibold tracking-wider text-slate-400 uppercase sm:text-[11px]">
+                <span class="h-1.5 w-1.5 rounded-full bg-slate-500"></span>
+                AVAILABLE
+              </span>
+            </div>
+          </div>
+          <div class="equinox-slot-row flex items-center justify-between gap-3 rounded-2xl px-3 py-2.5 sm:px-4 sm:py-3">
+            <div class="flex min-w-0 flex-1 items-center gap-3.5 sm:gap-5">
+              <span class="slot-num-badge inline-flex h-9 w-10 shrink-0 items-center justify-center rounded-xl font-mono text-xs font-extrabold tracking-wider text-white sm:h-10 sm:w-11 sm:text-sm">09</span>
+              <span class="truncate text-sm font-semibold tracking-wide text-slate-400 sm:text-base">Open Slot</span>
+            </div>
+            <div class="shrink-0">
+              <span class="inline-flex items-center gap-1.5 rounded-full border border-blue-400/20 bg-obsidian-950/45 px-3 py-1 text-[10px] font-semibold tracking-wider text-slate-400 uppercase sm:text-[11px]">
+                <span class="h-1.5 w-1.5 rounded-full bg-slate-500"></span>
+                AVAILABLE
+              </span>
+            </div>
+          </div>
+          <div class="equinox-slot-row flex items-center justify-between gap-3 rounded-2xl px-3 py-2.5 sm:px-4 sm:py-3">
+            <div class="flex min-w-0 flex-1 items-center gap-3.5 sm:gap-5">
+              <span class="slot-num-badge inline-flex h-9 w-10 shrink-0 items-center justify-center rounded-xl font-mono text-xs font-extrabold tracking-wider text-white sm:h-10 sm:w-11 sm:text-sm">10</span>
+              <span class="truncate text-sm font-semibold tracking-wide text-slate-400 sm:text-base">Open Slot</span>
+            </div>
+            <div class="shrink-0">
+              <span class="inline-flex items-center gap-1.5 rounded-full border border-blue-400/20 bg-obsidian-950/45 px-3 py-1 text-[10px] font-semibold tracking-wider text-slate-400 uppercase sm:text-[11px]">
+                <span class="h-1.5 w-1.5 rounded-full bg-slate-500"></span>
+                AVAILABLE
+              </span>
+            </div>
+          </div>
+          <div class="equinox-slot-row flex items-center justify-between gap-3 rounded-2xl px-3 py-2.5 sm:px-4 sm:py-3">
+            <div class="flex min-w-0 flex-1 items-center gap-3.5 sm:gap-5">
+              <span class="slot-num-badge inline-flex h-9 w-10 shrink-0 items-center justify-center rounded-xl font-mono text-xs font-extrabold tracking-wider text-white sm:h-10 sm:w-11 sm:text-sm">11</span>
+              <span class="truncate text-sm font-semibold tracking-wide text-slate-400 sm:text-base">Open Slot</span>
+            </div>
+            <div class="shrink-0">
+              <span class="inline-flex items-center gap-1.5 rounded-full border border-blue-400/20 bg-obsidian-950/45 px-3 py-1 text-[10px] font-semibold tracking-wider text-slate-400 uppercase sm:text-[11px]">
+                <span class="h-1.5 w-1.5 rounded-full bg-slate-500"></span>
+                AVAILABLE
+              </span>
+            </div>
+          </div>
+          <div class="equinox-slot-row flex items-center justify-between gap-3 rounded-2xl px-3 py-2.5 sm:px-4 sm:py-3">
+            <div class="flex min-w-0 flex-1 items-center gap-3.5 sm:gap-5">
+              <span class="slot-num-badge inline-flex h-9 w-10 shrink-0 items-center justify-center rounded-xl font-mono text-xs font-extrabold tracking-wider text-white sm:h-10 sm:w-11 sm:text-sm">12</span>
+              <span class="truncate text-sm font-semibold tracking-wide text-slate-400 sm:text-base">Open Slot</span>
+            </div>
+            <div class="shrink-0">
+              <span class="inline-flex items-center gap-1.5 rounded-full border border-blue-400/20 bg-obsidian-950/45 px-3 py-1 text-[10px] font-semibold tracking-wider text-slate-400 uppercase sm:text-[11px]">
+                <span class="h-1.5 w-1.5 rounded-full bg-slate-500"></span>
+                AVAILABLE
+              </span>
+            </div>
+          </div>
+        </div>
       </section>
 
-      <!-- ADMIN VIEW SECTION -->
+      <!-- ADMIN VIEW SECTION (Stealth Access via ?admin=1 or 5 Taps on SPEED ARENA) -->
       <section id="adminViewSection" class="hidden" aria-label="Admin Slot Management Panel">
         <!-- Password Lock Gate -->
         <div
@@ -675,7 +789,7 @@
             </div>
           </div>
 
-          <form onsubmit="window.handleAdminLogin(event)" class="space-y-3" novalidate>
+          <form id="adminLoginForm" class="space-y-3" novalidate>
             <div class="flex flex-col gap-2.5 sm:flex-row sm:items-center">
               <div class="relative flex-1">
                 <input
@@ -691,7 +805,7 @@
                 />
                 <button
                   type="button"
-                  onclick="window.togglePasswordVisibility()"
+                  data-action="toggle-password-visibility"
                   aria-label="Show or hide password"
                   class="equinox-glass-btn !absolute top-1/2 right-2 inline-flex -translate-y-1/2 cursor-pointer items-center rounded-lg px-2.5 py-1 text-[11px] font-medium text-slate-300"
                 >
@@ -701,7 +815,7 @@
 
               <button
                 type="submit"
-                onclick="window.handleAdminLogin(event)"
+                data-action="unlock-admin"
                 class="equinox-btn-primary inline-flex cursor-pointer items-center justify-center rounded-xl px-5 py-2.5 text-xs font-semibold text-white sm:text-sm"
               >
                 Unlock Admin
@@ -720,14 +834,14 @@
           <div class="mt-5 flex flex-wrap items-center justify-between gap-2 border-t border-blue-400/20 pt-4">
             <button
               type="button"
-              onclick="window.resetAdminPassword()"
+              data-action="reset-password"
               class="equinox-glass-btn cursor-pointer rounded-xl px-3.5 py-1.5 text-xs font-medium text-blue-200"
             >
               Reset Password
             </button>
             <button
               type="button"
-              onclick="window.openPublicView(false)"
+              data-action="back-to-public"
               class="equinox-glass-btn cursor-pointer rounded-xl px-3.5 py-1.5 text-xs font-medium text-slate-300"
             >
               Back to Public Slots
@@ -755,14 +869,14 @@
             <div class="flex items-center gap-2">
               <button
                 type="button"
-                onclick="window.lockAdminPanel()"
+                data-action="lock-admin"
                 class="equinox-glass-btn cursor-pointer rounded-xl px-3.5 py-1.5 text-xs font-medium text-slate-200"
               >
                 Lock Admin
               </button>
               <button
                 type="button"
-                onclick="window.openPublicView(false)"
+                data-action="back-to-public"
                 class="equinox-glass-btn cursor-pointer rounded-xl px-3.5 py-1.5 text-xs font-medium text-blue-200"
               >
                 Back to Public Slots
@@ -772,7 +886,7 @@
 
           <!-- Custom Room ID & Password Manager -->
           <form
-            onsubmit="window.handleSaveRoomDetails(event)"
+            id="adminRoomForm"
             class="rounded-2xl border border-blue-400/25 bg-obsidian-950/40 p-4 backdrop-blur-xl"
             novalidate
           >
@@ -788,7 +902,7 @@
               <div class="flex items-center gap-2">
                 <button
                   type="button"
-                  onclick="window.handleClearRoomDetails()"
+                  data-action="clear-room"
                   class="equinox-glass-btn cursor-pointer rounded-xl px-3 py-1.5 text-xs font-medium text-amber-200"
                 >
                   Clear Room
@@ -846,7 +960,7 @@
               <div class="flex flex-wrap items-center gap-2">
                 <button
                   type="button"
-                  onclick="window.handleResetDefaults()"
+                  data-action="reset-defaults"
                   class="equinox-glass-btn cursor-pointer rounded-xl px-3 py-1.5 text-xs font-medium text-blue-200"
                 >
                   Reset Defaults
@@ -854,7 +968,7 @@
                 <button
                   id="btnClearAllSlots"
                   type="button"
-                  onclick="window.handleClearAllSlots()"
+                  data-action="clear-all-slots"
                   class="cursor-pointer rounded-xl border border-rose-400/35 bg-rose-950/50 px-3 py-1.5 text-xs font-semibold text-rose-200 transition hover:border-rose-400/65 hover:bg-rose-900/65"
                 >
                   Clear All 12 Slots
@@ -862,7 +976,7 @@
                 <button
                   id="btnCancelClearAll"
                   type="button"
-                  onclick="window.cancelClearAllSlots()"
+                  data-action="cancel-clear-all"
                   class="equinox-glass-btn hidden cursor-pointer rounded-xl px-3 py-1.5 text-xs font-medium text-slate-300"
                 >
                   Cancel
@@ -878,17 +992,17 @@
               <select
                 id="swapSlotASelect"
                 aria-label="Swap Slot A"
-                class="rounded-lg border border-blue-400/25 bg-obsidian-950/80 px-2.5 py-1.5 text-xs font-semibold tabular-nums text-white focus:border-blue-400 focus:outline-none"
+                class="rounded-lg border border-blue-400/25 bg-obsidian-950/80 px-2.5 py-1.5 font-mono text-xs font-semibold tabular-nums text-white focus:border-blue-400 focus:outline-none"
               ></select>
               <span class="text-xs font-bold text-blue-400">&harr;</span>
               <select
                 id="swapSlotBSelect"
                 aria-label="Swap Slot B"
-                class="rounded-lg border border-blue-400/25 bg-obsidian-950/80 px-2.5 py-1.5 text-xs font-semibold tabular-nums text-white focus:border-blue-400 focus:outline-none"
+                class="rounded-lg border border-blue-400/25 bg-obsidian-950/80 px-2.5 py-1.5 font-mono text-xs font-semibold tabular-nums text-white focus:border-blue-400 focus:outline-none"
               ></select>
               <button
                 type="button"
-                onclick="window.handleSwapSlots()"
+                data-action="swap-slots"
                 class="equinox-glass-btn cursor-pointer rounded-lg px-3 py-1.5 text-xs font-semibold text-blue-200"
               >
                 Swap
@@ -901,7 +1015,7 @@
 
           <!-- Tournament Header, Social Links & Admin Password Settings -->
           <form
-            onsubmit="window.handleSaveGeneralSettings(event)"
+            id="adminSettingsForm"
             class="rounded-2xl border border-blue-400/25 bg-obsidian-950/40 p-4 backdrop-blur-xl"
             novalidate
           >
@@ -1019,7 +1133,8 @@
         href="https://whatsapp.com/channel/0029VbDxU9JIiRok6NoiGw02"
         target="_blank"
         rel="noopener noreferrer"
-        onclick="return window.handleSocialClick(event, 'whatsapp')"
+        data-action="open-social"
+        data-platform="whatsapp"
         class="equinox-glass-btn inline-flex items-center gap-2 rounded-full px-3.5 py-2 text-xs font-semibold text-white"
         aria-label="Open WhatsApp"
       >
@@ -1038,7 +1153,8 @@
         href="https://www.instagram.com/pov.speed_?gwpx=MWVkcDJhN243YWt6ZQ=="
         target="_blank"
         rel="noopener noreferrer"
-        onclick="return window.handleSocialClick(event, 'instagram')"
+        data-action="open-social"
+        data-platform="instagram"
         class="equinox-glass-btn inline-flex items-center gap-2 rounded-full px-3.5 py-2 text-xs font-semibold text-white"
         aria-label="Open Instagram"
       >
@@ -1054,20 +1170,17 @@
     </footer>
   </div>
 
-  <!-- Firebase Compat SDKs (Only activated when FIREBASE_CONFIG.databaseURL is populated) -->
-  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-database-compat.js"></script>
-
+  <!-- Clean Single Standard Script (Immediate Execution + Event Delegation) -->
   <script>
     (function () {
       'use strict';
 
       /* =========================================================================
-         1. MULTI-LOBBY & FIREBASE LIVE SYNC CONFIGURATION
+         1. MULTI-LOBBY & OPTIONAL FIREBASE REALTIME DATABASE CONFIGURATION
          - Change DEFAULT_LOBBY_ID to 'lobby1', 'lobby2', or 'lobby3' for separate
            Vercel deployments, OR pass ?lobby=1 / ?lobby=2 / ?lobby=3 in the URL.
-         - Paste your Firebase Web App config below to enable instant real-time
-           cloud sync across all players' devices.
+         - Optional: Paste your Firebase Realtime Database URL below to enable live
+           REST cloud sync across all players' devices without external SDK scripts.
          ========================================================================= */
       var DEFAULT_LOBBY_ID = 'lobby1';
 
@@ -1091,8 +1204,8 @@
               return /^\d+$/.test(cleaned) ? 'lobby' + cleaned : cleaned;
             }
           }
-        } catch (err) {
-          // Ignore URLSearchParams issues
+        } catch (e) {
+          // Ignore URLSearchParams errors
         }
         return DEFAULT_LOBBY_ID;
       }
@@ -1117,14 +1230,16 @@
 
       var toastTimer = null;
       var clearAllConfirmPending = false;
-      var firebaseDbRef = null;
-      var isFirebaseLive = false;
+      var brandTapCount = 0;
+      var brandTapTimer = null;
+      var firebasePollTimer = null;
+      var isFirebaseLive = Boolean(FIREBASE_CONFIG && FIREBASE_CONFIG.databaseURL);
 
-      /* Safe localStorage wrappers for sandboxed WebViews */
+      /* Safe Storage Wrappers */
       function safeGetStorage(key) {
         try {
           return window.localStorage.getItem(key);
-        } catch (err) {
+        } catch (e) {
           return null;
         }
       }
@@ -1133,7 +1248,7 @@
         try {
           window.localStorage.setItem(key, value);
           return true;
-        } catch (err) {
+        } catch (e) {
           return false;
         }
       }
@@ -1141,7 +1256,7 @@
       function safeRemoveStorage(key) {
         try {
           window.localStorage.removeItem(key);
-        } catch (err) {
+        } catch (e) {
           // Ignore storage error
         }
       }
@@ -1198,36 +1313,6 @@
         return DEFAULT_PASSWORD;
       }
 
-      function applyPayloadToState(parsed) {
-        if (!parsed || typeof parsed !== 'object') return;
-        if (typeof parsed.title === 'string' && parsed.title.trim()) {
-          state.title = parsed.title.trim().toUpperCase();
-        }
-        if (typeof parsed.subtitle === 'string' && parsed.subtitle.trim()) {
-          state.subtitle = parsed.subtitle.trim().toUpperCase();
-        }
-        if (typeof parsed.schedule === 'string' && parsed.schedule.trim()) {
-          state.schedule = parsed.schedule.trim();
-        }
-        if (typeof parsed.whatsappUrl === 'string' && parsed.whatsappUrl.trim()) {
-          state.whatsappUrl = normalizeUrl(parsed.whatsappUrl, DEFAULT_WHATSAPP);
-        }
-        if (typeof parsed.instagramUrl === 'string' && parsed.instagramUrl.trim()) {
-          state.instagramUrl = normalizeUrl(parsed.instagramUrl, DEFAULT_INSTAGRAM);
-        }
-        if (typeof parsed.roomId === 'string') {
-          state.roomId = parsed.roomId.trim();
-        }
-        if (typeof parsed.roomPass === 'string') {
-          state.roomPass = parsed.roomPass.trim();
-        }
-        if (Array.isArray(parsed.slots) && parsed.slots.length === TOTAL_SLOTS) {
-          for (var i = 0; i < TOTAL_SLOTS; i++) {
-            state.slots[i] = normalizeSlotEntry(parsed.slots[i], i + 1);
-          }
-        }
-      }
-
       function loadInitialState() {
         var initial = {
           activeTab: 'public',
@@ -1247,39 +1332,42 @@
         if (raw) {
           try {
             var parsed = JSON.parse(raw);
-            if (parsed && typeof parsed === 'object') {
-              if (typeof parsed.title === 'string' && parsed.title.trim()) {
-                initial.title = parsed.title.trim().toUpperCase();
-              }
-              if (typeof parsed.subtitle === 'string' && parsed.subtitle.trim()) {
-                initial.subtitle = parsed.subtitle.trim().toUpperCase();
-              }
-              if (typeof parsed.schedule === 'string' && parsed.schedule.trim()) {
-                initial.schedule = parsed.schedule.trim();
-              }
-              if (typeof parsed.whatsappUrl === 'string' && parsed.whatsappUrl.trim()) {
-                initial.whatsappUrl = normalizeUrl(parsed.whatsappUrl, DEFAULT_WHATSAPP);
-              }
-              if (typeof parsed.instagramUrl === 'string' && parsed.instagramUrl.trim()) {
-                initial.instagramUrl = normalizeUrl(parsed.instagramUrl, DEFAULT_INSTAGRAM);
-              }
-              if (typeof parsed.roomId === 'string') {
-                initial.roomId = parsed.roomId.trim();
-              }
-              if (typeof parsed.roomPass === 'string') {
-                initial.roomPass = parsed.roomPass.trim();
-              }
-              if (Array.isArray(parsed.slots) && parsed.slots.length === TOTAL_SLOTS) {
-                for (var i = 0; i < TOTAL_SLOTS; i++) {
-                  initial.slots[i] = normalizeSlotEntry(parsed.slots[i], i + 1);
-                }
-              }
-            }
-          } catch (err) {
-            // Fall back to default state
+            applyPayloadToObj(initial, parsed);
+          } catch (e) {
+            // Fall back to defaults
           }
         }
         return initial;
+      }
+
+      function applyPayloadToObj(targetObj, parsed) {
+        if (!parsed || typeof parsed !== 'object') return;
+        if (typeof parsed.title === 'string' && parsed.title.trim()) {
+          targetObj.title = parsed.title.trim().toUpperCase();
+        }
+        if (typeof parsed.subtitle === 'string' && parsed.subtitle.trim()) {
+          targetObj.subtitle = parsed.subtitle.trim().toUpperCase();
+        }
+        if (typeof parsed.schedule === 'string' && parsed.schedule.trim()) {
+          targetObj.schedule = parsed.schedule.trim();
+        }
+        if (typeof parsed.whatsappUrl === 'string' && parsed.whatsappUrl.trim()) {
+          targetObj.whatsappUrl = normalizeUrl(parsed.whatsappUrl, DEFAULT_WHATSAPP);
+        }
+        if (typeof parsed.instagramUrl === 'string' && parsed.instagramUrl.trim()) {
+          targetObj.instagramUrl = normalizeUrl(parsed.instagramUrl, DEFAULT_INSTAGRAM);
+        }
+        if (typeof parsed.roomId === 'string') {
+          targetObj.roomId = parsed.roomId.trim();
+        }
+        if (typeof parsed.roomPass === 'string') {
+          targetObj.roomPass = parsed.roomPass.trim();
+        }
+        if (Array.isArray(parsed.slots) && parsed.slots.length === TOTAL_SLOTS) {
+          for (var i = 0; i < TOTAL_SLOTS; i++) {
+            targetObj.slots[i] = normalizeSlotEntry(parsed.slots[i], i + 1);
+          }
+        }
       }
 
       var state = loadInitialState();
@@ -1297,52 +1385,103 @@
         };
       }
 
+      function getFirebaseEndpointUrl() {
+        if (!isFirebaseLive) return '';
+        var base = String(FIREBASE_CONFIG.databaseURL || '').replace(/\/+$/, '');
+        if (!base) return '';
+        var authParam = FIREBASE_CONFIG.apiKey ? '?auth=' + encodeURIComponent(FIREBASE_CONFIG.apiKey) : '';
+        return base + '/speed_arena/' + encodeURIComponent(LOBBY_ID) + '.json' + authParam;
+      }
+
       function persistState() {
         var payload = buildSerializablePayload();
-        safeSetStorage(STORAGE_DATA_KEY, JSON.stringify(payload));
+        var serialized = JSON.stringify(payload);
+        safeSetStorage(STORAGE_DATA_KEY, serialized);
 
-        if (isFirebaseLive && firebaseDbRef) {
-          try {
-            firebaseDbRef.set(payload);
-          } catch (err) {
-            // Keep localStorage intact if network write fails
+        if (isFirebaseLive && typeof window.fetch === 'function') {
+          var endpoint = getFirebaseEndpointUrl();
+          if (endpoint) {
+            try {
+              window.fetch(endpoint, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: serialized
+              });
+            } catch (e) {
+              // Keep localStorage copy if offline
+            }
           }
         }
       }
 
-      function initFirebaseLiveSync() {
-        if (!FIREBASE_CONFIG || !FIREBASE_CONFIG.databaseURL || !FIREBASE_CONFIG.apiKey) {
-          return;
-        }
-        if (typeof window.firebase === 'undefined' || typeof window.firebase.database !== 'function') {
-          return;
-        }
-        try {
-          var app = window.firebase.apps && window.firebase.apps.length
-            ? window.firebase.app()
-            : window.firebase.initializeApp(FIREBASE_CONFIG);
-          firebaseDbRef = window.firebase.database(app).ref('speed_arena/' + LOBBY_ID);
-          isFirebaseLive = true;
+      function syncFromFirebaseOnce() {
+        if (!isFirebaseLive || typeof window.fetch !== 'function') return;
+        var endpoint = getFirebaseEndpointUrl();
+        if (!endpoint) return;
 
-          firebaseDbRef.on('value', function (snapshot) {
-            var remoteData = snapshot.val();
+        window.fetch(endpoint)
+          .then(function (res) {
+            return res.ok ? res.json() : null;
+          })
+          .then(function (remoteData) {
             if (remoteData && typeof remoteData === 'object') {
-              applyPayloadToState(remoteData);
-              safeSetStorage(STORAGE_DATA_KEY, JSON.stringify(buildSerializablePayload()));
-              renderPublicUI();
-              if (state.activeTab === 'admin' && state.adminUnlocked) {
-                renderAdminUI();
+              var beforeJson = JSON.stringify(buildSerializablePayload());
+              applyPayloadToObj(state, remoteData);
+              var afterJson = JSON.stringify(buildSerializablePayload());
+              if (beforeJson !== afterJson) {
+                safeSetStorage(STORAGE_DATA_KEY, afterJson);
+                renderPublicUI();
+                if (state.activeTab === 'admin' && state.adminUnlocked) {
+                  renderAdminUI();
+                }
               }
-            } else {
-              firebaseDbRef.set(buildSerializablePayload());
+            } else if (remoteData === null) {
+              persistState();
             }
+          })
+          .catch(function () {
+            // Silently ignore transient network error
           });
-        } catch (err) {
-          isFirebaseLive = false;
-          firebaseDbRef = null;
+      }
+
+      function startFirebaseLivePolling() {
+        if (!isFirebaseLive) return;
+        syncFromFirebaseOnce();
+        if (firebasePollTimer) {
+          clearInterval(firebasePollTimer);
+        }
+        firebasePollTimer = setInterval(syncFromFirebaseOnce, 4000);
+      }
+
+      /* Stealth Admin Access Helpers */
+      function hasSecretAdminQuery() {
+        try {
+          var params = new URLSearchParams(window.location.search || '');
+          var adminParam = String(params.get('admin') || '').trim().toLowerCase();
+          return adminParam === '1' || adminParam === 'true';
+        } catch (e) {
+          return false;
         }
       }
 
+      function handleBrandTap() {
+        brandTapCount += 1;
+        if (brandTapTimer) {
+          clearTimeout(brandTapTimer);
+        }
+        if (brandTapCount >= 5) {
+          brandTapCount = 0;
+          brandTapTimer = null;
+          openAdminView(true);
+          return;
+        }
+        brandTapTimer = setTimeout(function () {
+          brandTapCount = 0;
+          brandTapTimer = null;
+        }, 2500);
+      }
+
+      /* Toast Banner */
       function showToast(message) {
         var banner = document.getElementById('toastBanner');
         var msgEl = document.getElementById('toastBannerMessage');
@@ -1355,17 +1494,15 @@
         if (toastTimer) {
           clearTimeout(toastTimer);
         }
-        toastTimer = setTimeout(function () {
-          window.hideToast();
-        }, 3200);
+        toastTimer = setTimeout(hideToast, 3200);
       }
 
-      window.hideToast = function () {
+      function hideToast() {
         var banner = document.getElementById('toastBanner');
         if (!banner) return;
         banner.classList.add('hidden');
         banner.classList.remove('flex');
-      };
+      }
 
       /* Cross-Browser Clipboard Copy Helper */
       function copyTextToClipboard(text, callback) {
@@ -1383,7 +1520,7 @@
           textArea.setSelectionRange(0, textArea.value.length);
           copied = document.execCommand('copy');
           document.body.removeChild(textArea);
-        } catch (err) {
+        } catch (e) {
           copied = false;
         }
 
@@ -1427,7 +1564,7 @@
         }, 1600);
       }
 
-      window.copyRoomField = function (fieldType, btnEl) {
+      function copyRoomField(fieldType, btnEl) {
         var idVal = state.roomId || 'WAITING';
         var passVal = state.roomPass || 'WAITING';
         var textToCopy = fieldType === 'id' ? idVal : passVal;
@@ -1441,9 +1578,9 @@
             showToast('Unable to copy automatically. Please copy manually.');
           }
         });
-      };
+      }
 
-      /* Render Header, Room Credentials & 12 Public Slots */
+      /* Render Header, Room Credentials & All 12 Public Slots */
       function renderPublicUI() {
         var navTitleEl = document.getElementById('navbarBrandTitle');
         if (navTitleEl) navTitleEl.textContent = state.title;
@@ -1502,7 +1639,7 @@
         var availEl = document.getElementById('summaryAvailable');
         if (availEl) availEl.textContent = padTwo(availableCount);
 
-        var listContainer = document.getElementById('publicSlotsList');
+        var listContainer = document.getElementById('slot-list-container');
         if (!listContainer) return;
 
         var rowsHtml = '';
@@ -1512,16 +1649,16 @@
           var numStr = padTwo(slot.slotNumber);
           var displayTeam = slot.teamName
             ? escapeHtml(slot.teamName)
-            : (isBooked ? 'RESERVED SLOT' : 'AVAILABLE');
+            : (isBooked ? 'RESERVED SLOT' : 'Open Slot');
 
           rowsHtml +=
             '<div class="equinox-slot-row ' + (isBooked ? 'is-booked' : '') + ' flex items-center justify-between gap-3 rounded-2xl px-3 py-2.5 sm:px-4 sm:py-3">' +
               '<div class="flex min-w-0 flex-1 items-center gap-3.5 sm:gap-5">' +
-                '<span class="slot-num-badge inline-flex h-9 w-10 shrink-0 items-center justify-center rounded-xl text-xs font-extrabold tracking-wider text-white sm:h-10 sm:w-11 sm:text-sm">' +
+                '<span class="slot-num-badge inline-flex h-9 w-10 shrink-0 items-center justify-center rounded-xl font-mono text-xs font-extrabold tracking-wider text-white sm:h-10 sm:w-11 sm:text-sm">' +
                   numStr +
                 '</span>' +
-                '<span class="truncate text-sm font-bold tracking-wide uppercase sm:text-base ' +
-                  (isBooked ? 'text-white' : 'font-semibold text-slate-400') + '">' +
+                '<span class="truncate text-sm tracking-wide sm:text-base ' +
+                  (isBooked ? 'font-bold text-white uppercase' : 'font-semibold text-slate-400') + '">' +
                   displayTeam +
                 '</span>' +
               '</div>' +
@@ -1531,7 +1668,8 @@
                       '<span class="h-1.5 w-1.5 rounded-full bg-blue-400"></span>' +
                       'BOOKED' +
                     '</span>'
-                  : '<span class="inline-flex items-center rounded-full border border-blue-400/20 bg-obsidian-950/45 px-3 py-1 text-[10px] font-semibold tracking-wider text-slate-400 uppercase sm:text-[11px]">' +
+                  : '<span class="inline-flex items-center gap-1.5 rounded-full border border-blue-400/20 bg-obsidian-950/45 px-3 py-1 text-[10px] font-semibold tracking-wider text-slate-400 uppercase sm:text-[11px]">' +
+                      '<span class="h-1.5 w-1.5 rounded-full bg-slate-500"></span>' +
                       'AVAILABLE' +
                     '</span>') +
               '</div>' +
@@ -1582,7 +1720,6 @@
         var igInput = document.getElementById('adminInstagramInput');
         if (igInput) igInput.value = state.instagramUrl;
 
-        /* Populate Swap Selects */
         var swapA = document.getElementById('swapSlotASelect');
         var swapB = document.getElementById('swapSlotBSelect');
         if (swapA && swapB) {
@@ -1598,7 +1735,6 @@
           swapB.value = prevB;
         }
 
-        /* Render 12 Editable Slot Rows with Booked/Available Toggle */
         var adminSlotsContainer = document.getElementById('adminSlotsList');
         if (!adminSlotsContainer) return;
 
@@ -1611,10 +1747,10 @@
           rowsHtml +=
             '<div class="flex flex-col gap-2 rounded-xl border border-blue-400/20 bg-obsidian-900/55 p-2.5 sm:flex-row sm:items-center">' +
               '<div class="flex items-center justify-between gap-2.5 sm:w-44 sm:shrink-0 sm:justify-start">' +
-                '<span class="slot-num-badge inline-flex h-8 w-9 items-center justify-center rounded-lg text-xs font-extrabold text-white">' +
+                '<span class="slot-num-badge inline-flex h-8 w-9 items-center justify-center rounded-lg font-mono text-xs font-extrabold text-white">' +
                   numStr +
                 '</span>' +
-                '<button type="button" onclick="window.handleToggleSlotStatus(' + slot.slotNumber + ')" ' +
+                '<button type="button" data-action="toggle-slot-status" data-slot="' + slot.slotNumber + '" ' +
                   'class="cursor-pointer rounded-full px-2.5 py-1 text-[10px] font-bold tracking-wider uppercase transition ' +
                   (isBooked
                     ? 'border border-blue-400/45 bg-blue-500/25 text-blue-200 hover:bg-blue-500/35'
@@ -1623,16 +1759,15 @@
                 '</button>' +
               '</div>' +
               '<div class="flex flex-1 items-center gap-2">' +
-                '<input id="adminSlotInput_' + slot.slotNumber + '" type="text" maxlength="32" ' +
+                '<input id="adminSlotInput_' + slot.slotNumber + '" data-slot-input="' + slot.slotNumber + '" type="text" maxlength="32" ' +
                   'value="' + escapeHtml(slot.teamName) + '" ' +
                   'placeholder="Enter team name..." ' +
-                  'onkeydown="if(event.key===\'Enter\'){event.preventDefault();window.handleSaveSingleSlot(' + slot.slotNumber + ');}" ' +
                   'class="min-w-0 flex-1 rounded-lg border border-blue-400/25 bg-obsidian-950/75 px-3 py-1.5 text-xs font-semibold text-white uppercase placeholder-slate-500 focus:border-blue-400 focus:outline-none sm:text-sm" />' +
-                '<button type="button" onclick="window.handleSaveSingleSlot(' + slot.slotNumber + ')" ' +
+                '<button type="button" data-action="save-single-slot" data-slot="' + slot.slotNumber + '" ' +
                   'class="equinox-btn-primary shrink-0 cursor-pointer rounded-lg px-3 py-1.5 text-xs font-semibold text-white">' +
                   'Save' +
                 '</button>' +
-                '<button type="button" onclick="window.handleClearSingleSlot(' + slot.slotNumber + ')" ' +
+                '<button type="button" data-action="clear-single-slot" data-slot="' + slot.slotNumber + '" ' +
                   'class="equinox-glass-btn shrink-0 cursor-pointer rounded-lg px-2.5 py-1.5 text-xs font-medium text-slate-300">' +
                   'Clear' +
                 '</button>' +
@@ -1643,40 +1778,25 @@
         adminSlotsContainer.innerHTML = rowsHtml;
       }
 
-      /* Navigation Switching */
-      function syncTabButtons() {
-        var pubTab = document.getElementById('tabPublicSlots');
-        var admTab = document.getElementById('tabAdminPanel');
+      /* View Section Synchronization */
+      function syncViewSections() {
         var pubSection = document.getElementById('publicViewSection');
         var admSection = document.getElementById('adminViewSection');
-
-        if (!pubTab || !admTab || !pubSection || !admSection) return;
+        if (!pubSection || !admSection) return;
 
         if (state.activeTab === 'public') {
-          pubTab.className = 'equinox-btn-primary inline-flex cursor-pointer items-center justify-center rounded-lg px-3.5 py-2 text-xs font-semibold text-white sm:text-sm';
-          pubTab.setAttribute('aria-selected', 'true');
-
-          admTab.className = 'inline-flex cursor-pointer items-center justify-center rounded-lg px-3.5 py-2 text-xs font-medium text-slate-300 transition hover:text-white sm:text-sm';
-          admTab.setAttribute('aria-selected', 'false');
-
           pubSection.classList.remove('hidden');
           admSection.classList.add('hidden');
         } else {
-          admTab.className = 'equinox-btn-primary inline-flex cursor-pointer items-center justify-center rounded-lg px-3.5 py-2 text-xs font-semibold text-white sm:text-sm';
-          admTab.setAttribute('aria-selected', 'true');
-
-          pubTab.className = 'inline-flex cursor-pointer items-center justify-center rounded-lg px-3.5 py-2 text-xs font-medium text-slate-300 transition hover:text-white sm:text-sm';
-          pubTab.setAttribute('aria-selected', 'false');
-
           pubSection.classList.add('hidden');
           admSection.classList.remove('hidden');
           renderAdminUI();
         }
       }
 
-      window.openPublicView = function (shouldScroll) {
+      function openPublicView(shouldScroll) {
         state.activeTab = 'public';
-        syncTabButtons();
+        syncViewSections();
         renderPublicUI();
         if (shouldScroll) {
           var container = document.getElementById('slotsContainer');
@@ -1684,11 +1804,11 @@
             container.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }
         }
-      };
+      }
 
-      window.openAdminView = function (shouldScroll) {
+      function openAdminView(shouldScroll) {
         state.activeTab = 'admin';
-        syncTabButtons();
+        syncViewSections();
         if (shouldScroll) {
           var container = document.getElementById('slotsContainer');
           if (container) {
@@ -1701,10 +1821,10 @@
             if (pinInput) pinInput.focus();
           }, 80);
         }
-      };
+      }
 
       /* Admin Authentication */
-      window.handleAdminLogin = function (event) {
+      function handleAdminLogin(event) {
         if (event) event.preventDefault();
         var pinInput = document.getElementById('adminPinInput');
         var errEl = document.getElementById('adminLoginError');
@@ -1728,9 +1848,9 @@
           pinInput.focus();
           pinInput.select();
         }
-      };
+      }
 
-      window.togglePasswordVisibility = function () {
+      function togglePasswordVisibility() {
         var pinInput = document.getElementById('adminPinInput');
         var labelEl = document.getElementById('passwordToggleLabel');
         if (!pinInput || !labelEl) return;
@@ -1742,9 +1862,9 @@
           pinInput.type = 'password';
           labelEl.textContent = 'Show';
         }
-      };
+      }
 
-      window.resetAdminPassword = function () {
+      function resetAdminPassword() {
         state.adminPassword = DEFAULT_PASSWORD;
         safeSetStorage(STORAGE_PASS_KEY, DEFAULT_PASSWORD);
         var errEl = document.getElementById('adminLoginError');
@@ -1755,17 +1875,17 @@
           pinInput.focus();
         }
         showToast('Password reset.');
-      };
+      }
 
-      window.lockAdminPanel = function () {
+      function lockAdminPanel() {
         state.adminUnlocked = false;
-        window.cancelClearAllSlots();
+        cancelClearAllSlots();
         renderAdminUI();
         showToast('Admin Panel locked.');
-      };
+      }
 
       /* Admin Actions: Room ID & Password */
-      window.handleSaveRoomDetails = function (event) {
+      function handleSaveRoomDetails(event) {
         if (event) event.preventDefault();
         if (!state.adminUnlocked) return;
 
@@ -1777,9 +1897,9 @@
         persistState();
         renderPublicUI();
         showToast('Room ID & Password updated.');
-      };
+      }
 
-      window.handleClearRoomDetails = function () {
+      function handleClearRoomDetails() {
         if (!state.adminUnlocked) return;
         state.roomId = '';
         state.roomPass = '';
@@ -1791,11 +1911,11 @@
         persistState();
         renderPublicUI();
         showToast('Room ID & Password cleared to WAITING.');
-      };
+      }
 
       /* Admin Actions: 12-Slot Management */
-      window.handleSaveSingleSlot = function (slotNum) {
-        if (!state.adminUnlocked) return;
+      function handleSaveSingleSlot(slotNum) {
+        if (!state.adminUnlocked || !slotNum) return;
         var input = document.getElementById('adminSlotInput_' + slotNum);
         if (!input) return;
 
@@ -1811,10 +1931,10 @@
             ? 'Slot ' + padTwo(slotNum) + ' assigned to ' + teamName + '.'
             : 'Slot ' + padTwo(slotNum) + ' set to AVAILABLE.'
         );
-      };
+      }
 
-      window.handleToggleSlotStatus = function (slotNum) {
-        if (!state.adminUnlocked) return;
+      function handleToggleSlotStatus(slotNum) {
+        if (!state.adminUnlocked || !slotNum) return;
         var slot = state.slots[slotNum - 1];
         var input = document.getElementById('adminSlotInput_' + slotNum);
         if (input) {
@@ -1828,19 +1948,19 @@
         showToast(
           'Slot ' + padTwo(slotNum) + ' marked as ' + (slot.booked ? 'BOOKED.' : 'AVAILABLE.')
         );
-      };
+      }
 
-      window.handleClearSingleSlot = function (slotNum) {
-        if (!state.adminUnlocked) return;
+      function handleClearSingleSlot(slotNum) {
+        if (!state.adminUnlocked || !slotNum) return;
         state.slots[slotNum - 1].teamName = '';
         state.slots[slotNum - 1].booked = false;
         persistState();
         renderPublicUI();
         renderAdminUI();
         showToast('Slot ' + padTwo(slotNum) + ' cleared.');
-      };
+      }
 
-      window.handleSwapSlots = function () {
+      function handleSwapSlots() {
         if (!state.adminUnlocked) return;
         var swapA = document.getElementById('swapSlotASelect');
         var swapB = document.getElementById('swapSlotBSelect');
@@ -1864,9 +1984,9 @@
         renderPublicUI();
         renderAdminUI();
         showToast('Swapped Slot ' + padTwo(idxA + 1) + ' and Slot ' + padTwo(idxB + 1) + '.');
-      };
+      }
 
-      window.handleClearAllSlots = function () {
+      function handleClearAllSlots() {
         if (!state.adminUnlocked) return;
         var btnClear = document.getElementById('btnClearAllSlots');
         var btnCancel = document.getElementById('btnCancelClearAll');
@@ -1879,22 +1999,22 @@
         }
 
         state.slots = createDefaultSlots();
-        window.cancelClearAllSlots();
+        cancelClearAllSlots();
         persistState();
         renderPublicUI();
         renderAdminUI();
         showToast('All 12 slots cleared to AVAILABLE.');
-      };
+      }
 
-      window.cancelClearAllSlots = function () {
+      function cancelClearAllSlots() {
         clearAllConfirmPending = false;
         var btnClear = document.getElementById('btnClearAllSlots');
         var btnCancel = document.getElementById('btnCancelClearAll');
         if (btnClear) btnClear.textContent = 'Clear All 12 Slots';
         if (btnCancel) btnCancel.classList.add('hidden');
-      };
+      }
 
-      window.handleResetDefaults = function () {
+      function handleResetDefaults() {
         if (!state.adminUnlocked) return;
         state.title = DEFAULT_TITLE;
         state.subtitle = DEFAULT_SUBTITLE;
@@ -1904,16 +2024,16 @@
         state.roomId = '';
         state.roomPass = '';
         state.slots = createDefaultSlots();
-        window.cancelClearAllSlots();
+        cancelClearAllSlots();
 
         persistState();
         renderPublicUI();
         renderAdminUI();
         showToast('Tournament defaults restored.');
-      };
+      }
 
       /* Admin Actions: Tournament Header, Social URLs & Password */
-      window.handleSaveGeneralSettings = function (event) {
+      function handleSaveGeneralSettings(event) {
         if (event) event.preventDefault();
         if (!state.adminUnlocked) return;
 
@@ -1963,23 +2083,88 @@
         renderPublicUI();
         renderAdminUI();
         showToast(passwordChanged ? 'Settings and new password saved.' : 'Settings saved.');
-      };
+      }
 
       /* Bottom Corner Social Links Handler */
-      window.handleSocialClick = function (event, platform) {
+      function handleSocialClick(event, platform) {
         var url = platform === 'whatsapp' ? state.whatsappUrl : state.instagramUrl;
-        if (!url) return true;
+        if (!url) return;
         try {
           var win = window.open(url, '_blank', 'noopener,noreferrer');
-          if (win) {
-            if (event) event.preventDefault();
-            return false;
+          if (win && event) {
+            event.preventDefault();
           }
-        } catch (err) {
-          // Fall back to default anchor behavior
+        } catch (e) {
+          // Allow native anchor navigation
         }
-        return true;
-      };
+      }
+
+      /* Clean Document-Level Event Delegation */
+      document.addEventListener('click', function (event) {
+        var target = event.target && event.target.closest ? event.target.closest('[data-action]') : null;
+        if (!target) return;
+
+        var action = target.getAttribute('data-action');
+        if (!action) return;
+
+        if (action === 'brand-tap') {
+          handleBrandTap();
+        } else if (action === 'scroll-slots') {
+          openPublicView(true);
+        } else if (action === 'dismiss-toast') {
+          hideToast();
+        } else if (action === 'copy-room') {
+          copyRoomField(target.getAttribute('data-field') || 'id', target);
+        } else if (action === 'toggle-password-visibility') {
+          togglePasswordVisibility();
+        } else if (action === 'unlock-admin') {
+          handleAdminLogin(event);
+        } else if (action === 'reset-password') {
+          resetAdminPassword();
+        } else if (action === 'back-to-public') {
+          openPublicView(false);
+        } else if (action === 'lock-admin') {
+          lockAdminPanel();
+        } else if (action === 'clear-room') {
+          handleClearRoomDetails();
+        } else if (action === 'reset-defaults') {
+          handleResetDefaults();
+        } else if (action === 'clear-all-slots') {
+          handleClearAllSlots();
+        } else if (action === 'cancel-clear-all') {
+          cancelClearAllSlots();
+        } else if (action === 'swap-slots') {
+          handleSwapSlots();
+        } else if (action === 'toggle-slot-status') {
+          handleToggleSlotStatus(parseInt(target.getAttribute('data-slot') || '0', 10));
+        } else if (action === 'save-single-slot') {
+          handleSaveSingleSlot(parseInt(target.getAttribute('data-slot') || '0', 10));
+        } else if (action === 'clear-single-slot') {
+          handleClearSingleSlot(parseInt(target.getAttribute('data-slot') || '0', 10));
+        } else if (action === 'open-social') {
+          handleSocialClick(event, target.getAttribute('data-platform') || 'whatsapp');
+        }
+      });
+
+      document.addEventListener('keydown', function (event) {
+        if (event.key !== 'Enter') return;
+        var target = event.target;
+        if (!target || !target.getAttribute) return;
+        var slotAttr = target.getAttribute('data-slot-input');
+        if (slotAttr) {
+          event.preventDefault();
+          handleSaveSingleSlot(parseInt(slotAttr, 10));
+        }
+      });
+
+      var loginForm = document.getElementById('adminLoginForm');
+      if (loginForm) loginForm.addEventListener('submit', handleAdminLogin);
+
+      var roomForm = document.getElementById('adminRoomForm');
+      if (roomForm) roomForm.addEventListener('submit', handleSaveRoomDetails);
+
+      var settingsForm = document.getElementById('adminSettingsForm');
+      if (settingsForm) settingsForm.addEventListener('submit', handleSaveGeneralSettings);
 
       /* Subtle GPU Ambient Wave Motion */
       function startAmbientMotion() {
@@ -2000,10 +2185,15 @@
       }
 
       /* Immediate Boot */
-      syncTabButtons();
       renderPublicUI();
-      initFirebaseLiveSync();
+      startFirebaseLivePolling();
       startAmbientMotion();
+
+      if (hasSecretAdminQuery()) {
+        openAdminView(true);
+      } else {
+        syncViewSections();
+      }
     })();
   </script>
 </body>
